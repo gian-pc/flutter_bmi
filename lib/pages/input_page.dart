@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_bmi/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,13 @@ const activeCardColor = Color(0xff1d1e33);
 const bottomContainerHeight = 75.0;
 const bottomContainerColor = Color(0xffeb1556);
 const tabSelectedColor = Color(0xff111328);
+
+const labelTextStyle = TextStyle(
+  color: Colors.white54,
+  fontSize: 20.0,
+);
+
+const numberTextStyle = TextStyle(fontSize: 40.0, fontWeight: FontWeight.w700);
 
 enum Gender { male, female }
 
@@ -16,6 +24,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int height = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +52,14 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    color: selectedGender == Gender.female ? tabSelectedColor : activeCardColor,
-                    childCard: IconContent(text: "FEMALE", icon: FontAwesomeIcons.venus),
-                    miFuncion: (){
-                      selectedGender=Gender.female;
-                      setState(() {
-
-                      });
+                    color: selectedGender == Gender.female
+                        ? tabSelectedColor
+                        : activeCardColor,
+                    childCard: IconContent(
+                        text: "FEMALE", icon: FontAwesomeIcons.venus),
+                    miFuncion: () {
+                      selectedGender = Gender.female;
+                      setState(() {});
                     },
                   ),
                 ),
@@ -62,7 +72,31 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
-                    childCard: FaIcon(FontAwesomeIcons.plus),
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("HEIGHT", style: labelTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(height.toString(), style: numberTextStyle),
+                            Text(" cm", style: labelTextStyle)
+                          ],
+                        ),
+                        Slider(
+                          value: height.toDouble(),
+                          min: 50,
+                          max: 250,
+                          onChanged: (double value) {
+                            height = value.round();
+                            print(height);
+                            setState(() {});
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
