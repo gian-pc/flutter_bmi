@@ -7,7 +7,16 @@ const bottomContainerHeight = 75.0;
 const bottomContainerColor = Color(0xffeb1556);
 const tabSelectedColor = Color(0xff111328);
 
-class InputPage extends StatelessWidget {
+enum Gender { male, female }
+
+class InputPage extends StatefulWidget {
+  @override
+  _InputPageState createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,31 +29,28 @@ class InputPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      print("Male");
+                  child: ReusableCard(
+                    color: selectedGender == Gender.male
+                        ? tabSelectedColor
+                        : activeCardColor,
+                    childCard:
+                        IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
+                    miFuncion: () {
+                      selectedGender = Gender.male;
+                      setState(() {});
                     },
-                    child: ReusableCard(
-                      color: activeCardColor,
-                      childCard: IconContent(
-                        text: "MALE",
-                        icon: FontAwesomeIcons.mars,
-                      ),
-                    ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      print("Female");
+                  child: ReusableCard(
+                    color: selectedGender == Gender.female ? tabSelectedColor : activeCardColor,
+                    childCard: IconContent(text: "FEMALE", icon: FontAwesomeIcons.venus),
+                    miFuncion: (){
+                      selectedGender=Gender.female;
+                      setState(() {
+
+                      });
                     },
-                    child: ReusableCard(
-                      color: tabSelectedColor,
-                      childCard: IconContent(
-                        text: "FEMALE",
-                        icon: FontAwesomeIcons.venus,
-                      ),
-                    ),
                   ),
                 ),
               ],
@@ -91,5 +97,3 @@ class InputPage extends StatelessWidget {
     );
   }
 }
-
-

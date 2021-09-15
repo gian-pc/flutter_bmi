@@ -28,17 +28,23 @@ class IconContent extends StatelessWidget {
 class ReusableCard extends StatelessWidget {
   late Color color;
   late Widget childCard;
+  Function? miFuncion;
 
-  ReusableCard({required this.color, required this.childCard});
+  ReusableCard({required this.color, required this.childCard, this.miFuncion});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: this.childCard,
-      margin: EdgeInsets.all(14.0),
-      decoration: BoxDecoration(
-        color: this.color,
-        borderRadius: BorderRadius.circular(18.0),
+    return GestureDetector(
+      onTap: (){
+        this.miFuncion!();
+      },
+      child: Container(
+        child: this.childCard,
+        margin: EdgeInsets.all(14.0),
+        decoration: BoxDecoration(
+          color: this.color,
+          borderRadius: BorderRadius.circular(18.0),
+        ),
       ),
     );
   }
