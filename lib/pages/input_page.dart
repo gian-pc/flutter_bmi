@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo3_bmi/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const activeCardColor = Color(0xff1d1e33);
 const bottomContainerHeight = 75.0;
-const bottomContainerColor=Color(0xffeb1556);
+const bottomContainerColor = Color(0xffeb1556);
+const tabSelectedColor = Color(0xff111328);
 
 class InputPage extends StatelessWidget {
   @override
@@ -17,10 +20,32 @@ class InputPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: GestureDetector(
+                    onTap: (){
+                      print("Male");
+                    },
+                    child: ReusableCard(
+                      color: activeCardColor,
+                      childCard: IconContent(
+                        text: "MALE",
+                        icon: FontAwesomeIcons.mars,
+                      ),
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: GestureDetector(
+                    onTap: (){
+                      print("Female");
+                    },
+                    child: ReusableCard(
+                      color: tabSelectedColor,
+                      childCard: IconContent(
+                        text: "FEMALE",
+                        icon: FontAwesomeIcons.venus,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -29,7 +54,10 @@ class InputPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    childCard: FaIcon(FontAwesomeIcons.plus),
+                  ),
                 ),
               ],
             ),
@@ -38,10 +66,16 @@ class InputPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    childCard: Column(),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    childCard: Column(),
+                  ),
                 ),
               ],
             ),
@@ -51,7 +85,6 @@ class InputPage extends StatelessWidget {
             height: bottomContainerHeight,
             width: double.infinity,
             margin: EdgeInsets.only(top: 10),
-
           ),
         ],
       ),
@@ -59,19 +92,4 @@ class InputPage extends StatelessWidget {
   }
 }
 
-class ReusableCard extends StatelessWidget {
-  late Color color;
 
-  ReusableCard({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(14.0),
-      decoration: BoxDecoration(
-        color: this.color,
-        borderRadius: BorderRadius.circular(18.0),
-      ),
-    );
-  }
-}
