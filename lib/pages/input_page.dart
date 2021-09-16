@@ -24,7 +24,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
-  int height = 100;
+  int height = 170;
+  int weight = 70;
+  int age = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +110,77 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
-                    childCard: Column(),
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "WEIGHT",
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                weight++;
+                                setState(() {});
+                              },
+                            ),
+                            SizedBox(width: 10),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                weight--;
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     color: activeCardColor,
-                    childCard: Column(),
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "AGE",
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                age++;
+                                setState(() {});
+                              },
+                            ),
+                            SizedBox(width: 10),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                age--;
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -128,6 +194,27 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  late IconData icon;
+  Function? onPressed;
+
+  RoundIconButton({required this.icon, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: () {
+        this.onPressed!();
+      },
+      constraints: BoxConstraints.tightFor(height: 50, width: 50),
+      child: FaIcon(this.icon),
+      fillColor: Color(0xff4c4f5e),
+      shape: CircleBorder(),
+      elevation: 5,
     );
   }
 }
