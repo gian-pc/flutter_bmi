@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo3_bmi/pages/result_page.dart';
 import 'package:flutter_codigo3_bmi/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -186,11 +187,12 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            height: bottomContainerHeight,
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 10),
+          MyNavigatorButton(
+            text: "CALCULATOR",
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultPage()));
+            },
           ),
         ],
       ),
@@ -198,23 +200,4 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  late IconData icon;
-  Function? onPressed;
 
-  RoundIconButton({required this.icon, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: () {
-        this.onPressed!();
-      },
-      constraints: BoxConstraints.tightFor(height: 50, width: 50),
-      child: FaIcon(this.icon),
-      fillColor: Color(0xff4c4f5e),
-      shape: CircleBorder(),
-      elevation: 5,
-    );
-  }
-}
