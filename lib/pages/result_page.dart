@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_bmi/pages/input_page.dart';
 import 'package:flutter_codigo3_bmi/widgets.dart';
 
-
 class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+  late String bmiNumber;
+  late String result;
+  late String interpretation;
 
+  ResultPage(
+      {required this.bmiNumber,
+      required this.result,
+      required this.interpretation});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +26,7 @@ class ResultPage extends StatelessWidget {
               fontSize: 44,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
           ),
           Expanded(
             child: ReusableCard(
@@ -29,28 +35,32 @@ class ResultPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Normal",
+                    this.result,
                     style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent),
                   ),
                   Text(
-                    "50",
+                    this.bmiNumber,
                     style: TextStyle(
                       fontSize: 80.0,
                       fontWeight: FontWeight.bold,
-
                     ),
                   ),
-                  Text("You have a normal...", style: TextStyle(fontSize: 24.0),),
+                  Text(
+                    this.interpretation,
+                    style: TextStyle(fontSize: 24.0),
+                  ),
                 ],
               ),
             ),
           ),
-          MyNavigatorButton(text: "RE-CALCULATE", onTap: (){
-            Navigator.pop(context);
-          })
+          MyNavigatorButton(
+              text: "RE-CALCULATE",
+              onTap: () {
+                Navigator.pop(context);
+              })
         ],
       ),
     );

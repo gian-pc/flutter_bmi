@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo3_bmi/bmi_brain.dart';
 import 'package:flutter_codigo3_bmi/pages/result_page.dart';
 import 'package:flutter_codigo3_bmi/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -190,8 +191,24 @@ class _InputPageState extends State<InputPage> {
           MyNavigatorButton(
             text: "CALCULATOR",
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ResultPage()));
+              BMIBrain matasquita = new BMIBrain(
+                height: height,
+                weight: weight,
+              );
+              String bmi = matasquita.calculateBMI();
+              String result = matasquita.getResult();
+              String interpretation = matasquita.getInterpretation();
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    bmiNumber: bmi,
+                    result: result,
+                    interpretation: interpretation,
+                  ),
+                ),
+              );
             },
           ),
         ],
@@ -199,5 +216,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
